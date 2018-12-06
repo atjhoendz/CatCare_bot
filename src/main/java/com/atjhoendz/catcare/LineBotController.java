@@ -44,11 +44,11 @@ public class LineBotController {
             ObjectMapper objectMapper = ModelObjectMapper.createNewObjectMapper();
             EventsModel eventsModel = objectMapper.readValue(eventsPayload, EventsModel.class);
             eventsModel.getEvents().forEach((event)->{
-                if(event instanceof MessageEvent){
-                    MessageEvent messageEvent = (MessageEvent) event;
-                    TextMessageContent textMessageContent = (TextMessageContent) messageEvent.getMessage();
-                    replyText(messageEvent.getReplyToken(), textMessageContent.getText());
-                }
+//                if(event instanceof MessageEvent){
+//                    MessageEvent messageEvent = (MessageEvent) event;
+//                    TextMessageContent textMessageContent = (TextMessageContent) messageEvent.getMessage();
+//                    replyText(messageEvent.getReplyToken(), textMessageContent.getText());
+//                }
             });
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (IOException e){
