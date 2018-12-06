@@ -3,7 +3,6 @@ package com.atjhoendz.catcare;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.client.LineSignatureValidator;
-import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.ReplyMessage;
 import com.linecorp.bot.model.event.MessageEvent;
 import com.linecorp.bot.model.event.message.TextMessageContent;
@@ -21,6 +20,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 @RestController
+@RequestMapping(value="/linebot")
 public class LineBotController {
 
     @Autowired
@@ -31,15 +31,15 @@ public class LineBotController {
     @Qualifier("lineSignatureValidator")
     private LineSignatureValidator lineSignatureValidator;
 
-    @RequestMapping(value="/webhook", method = RequestMethod.POST)
+    @RequestMapping(value="/callback", method = RequestMethod.POST)
     public ResponseEntity<String> callback(
             @RequestHeader("X-Line-Signature") String xLineSignature,
             @RequestBody String eventsPayload)
     {
         try {
-            if(!lineSignatureValidator.validateSignature(eventsPayload.getBytes(), xLineSignature)){
-                throw new RuntimeException("Invalid Signature Validation");
-            }
+//            if(!lineSignatureValidator.validateSignature(eventsPayload.getBytes(), xLineSignature)){
+//                throw new RuntimeException("Invalid Signature Validation");
+//            }
 
             ObjectMapper objectMapper = ModelObjectMapper.createNewObjectMapper();
             EventsModel eventsModel = objectMapper.readValue(eventsPayload, EventsModel.class);
