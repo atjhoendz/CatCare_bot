@@ -37,9 +37,9 @@ public class LineBotController {
             @RequestBody String eventsPayload)
     {
         try {
-            if(!lineSignatureValidator.validateSignature(eventsPayload.getBytes(), xLineSignature)){
-                throw new RuntimeException("Invalid Signature Validation");
-            }
+//            if(!lineSignatureValidator.validateSignature(eventsPayload.getBytes(), xLineSignature)){
+//                throw new RuntimeException("Invalid Signature Validation");
+//            }
 
             ObjectMapper objectMapper = ModelObjectMapper.createNewObjectMapper();
             EventsModel eventsModel = objectMapper.readValue(eventsPayload, EventsModel.class);
