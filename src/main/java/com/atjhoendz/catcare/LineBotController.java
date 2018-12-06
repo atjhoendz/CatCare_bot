@@ -3,12 +3,14 @@ package com.atjhoendz.catcare;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.client.LineSignatureValidator;
+import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.ReplyMessage;
 import com.linecorp.bot.model.event.MessageEvent;
 import com.linecorp.bot.model.event.message.TextMessageContent;
 import com.linecorp.bot.model.message.StickerMessage;
 import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.model.objectmapper.ModelObjectMapper;
+import com.linecorp.bot.model.profile.UserProfileResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -73,5 +75,26 @@ public class LineBotController {
         StickerMessage stickerMessage = new StickerMessage(packageId, stickerId);
         ReplyMessage replyMessage = new ReplyMessage(replyToken, stickerMessage);
         reply(replyMessage);
+    }
+
+    private UserProfileResponse getProfile(String userId){
+        try{
+            return lineMessagingClient.getProfile(userId).get();
+        }catch (InterruptedException | ExecutionException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
+    public ResponseEntity<String> profile(
+            @PathVariable("id") String userId
+    ){
+        UserProfileResponse profile = getProfile(userId);
+        if(profile != null) {
+            String profileName = profile.getDisplayName();
+            return new ResponseEntity<String>("Hello, " + profileName, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
     }
 }
