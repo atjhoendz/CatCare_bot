@@ -1,0 +1,35 @@
+buildscript {
+	ext {
+		springBootVersion = '2.1.1.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.atjhoendz.catcare'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('com.linecorp.bot:line-bot-api-client:1.20.0')
+	compile('com.linecorp.bot:line-bot-model:1.20.0')
+	compile('org.apache.commons:commons-io:1.3.2')
+	compile('org.springframework.boot:spring-boot-starter-data-rest')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+//	implementation('org.springframework.boot:spring-boot-starter-data-rest')
+//	testImplementation('org.springframework.boot:spring-boot-starter-test')
+}
