@@ -59,27 +59,27 @@ public class LineBotController {
                 System.out.println("Payload: " + eventsPayload);
             }
 
-//            Gson gson = new Gson();
-//            Payload payload = gson.fromJson(eventsPayload, Payload.class);
-//
-//            String msgText = " ";
-//            String idTarget = " ";
-//            String eventType = payload.events[0].type;
-//
-//            if(eventType.equals("follow")){
-//                replyToUser(payload.events[0].replyToken, "Hello Cat Lovers! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberikan solusinya.");
-//                replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");
-//            }else if(eventType.equals("message")){
-//                idTarget = payload.events[0].source.getSenderId();
-//                String pesan = payload.events[0].txtmessage.getMessage().getText().toLowerCase();
-//                if(pesan.equals("ya")){
-//                    replyToUser(payload.events[0].replyToken, "Masukan keluhan kucingmu");
-//                }else if(pesan.equals("tidak")){
-//                    replyToUser(payload.events[0].replyToken, "Selamat kucing anda baik baik saja :)");
-//                }else{
-//                    replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");
-//                }
-//            }
+            Gson gson = new Gson();
+            Payload payload = gson.fromJson(eventsPayload, Payload.class);
+
+            String msgText = " ";
+            String idTarget = " ";
+            String eventType = payload.events[0].type;
+
+            if(eventType.equals("follow")){
+                replyToUser(payload.events[0].replyToken, "Hello Cat Lovers! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberikan solusinya.");
+                replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");
+            }else if(eventType.equals("message")){
+
+                String pesan = payload.events[0].message.text;
+                if(pesan.equals("ya")){
+                    replyToUser(payload.events[0].replyToken, "Masukan keluhan kucingmu");
+                }else if(pesan.equals("tidak")){
+                    replyToUser(payload.events[0].replyToken, "Selamat kucing anda baik baik saja :)");
+                }else{
+                    replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");
+                }
+            }
 
             return new ResponseEntity<>(HttpStatus.OK);
     }
