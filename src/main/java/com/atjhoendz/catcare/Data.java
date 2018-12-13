@@ -21,7 +21,7 @@ public class Data {
         Set<String> unionList = new HashSet<String>(dataKeluhan);
         unionList.retainAll(keluhanUser);
 
-        if(unionList.size() > 3){
+        if(unionList.size() == 0){
             return "Flu";
         }else{
             return "Sehat";
