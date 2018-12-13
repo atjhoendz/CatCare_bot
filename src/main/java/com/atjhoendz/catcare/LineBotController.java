@@ -1,16 +1,10 @@
 package com.atjhoendz.catcare;
 
 import com.google.gson.Gson;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.linecorp.bot.client.LineMessagingClientBuilder;
 import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.client.LineSignatureValidator;
 import com.linecorp.bot.model.ReplyMessage;
-import com.linecorp.bot.model.event.MessageEvent;
-import com.linecorp.bot.model.event.message.TextMessageContent;
-import com.linecorp.bot.model.message.StickerMessage;
 import com.linecorp.bot.model.message.TextMessage;
-import com.linecorp.bot.model.objectmapper.ModelObjectMapper;
 import com.linecorp.bot.model.profile.UserProfileResponse;
 import com.linecorp.bot.model.response.BotApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +12,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import retrofit2.Response;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -76,15 +69,20 @@ public class LineBotController {
             }else if(eventType.equals("message")){
                 msgText = payload.events[0].message.text;
                 msgText = msgText.toLowerCase();
+                String[] arrMsg = msgText.split(" ");
 
                 if(msgText.equals("ya")){
                     replyToUser(payload.events[0].replyToken, "Masukan keluhan kucingmu");
                     state = "ya";
-                    keluhanUser.add(msgText);
+                    for(int i = 0; i < arrMsg.length; i++){
+                        keluhanUser.add(arrMsg[i]);
+                    }
+                    System.out.println(keluhanUser);
                 }else if(msgText.equals("tidak") && state.equals("")){
                     replyToUser(payload.events[0].replyToken, "Selamat kucing anda baik baik saja :)");
                 }else if(msgText.equals("tidak") && state.equals("ya")){
                     String hasil = data.cekKeluhan(keluhanUser);
+                    System.out.println(hasil);
                     if(!hasil.equals("Sehat")){
                         replyToUser(payload.events[0].replyToken, "Penyakit kucing anda adalah " + hasil);
                         state = "";
