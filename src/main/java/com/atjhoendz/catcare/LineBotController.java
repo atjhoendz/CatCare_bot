@@ -71,10 +71,11 @@ public class LineBotController {
                 replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");
             }else if(eventType.equals("message")){
 
-                String pesan = payload.events[0].message.text;
-                if(pesan.equals("ya")){
+                msgText = payload.events[0].message.text;
+                msgText = msgText.toLowerCase();
+                if(msgText.equals("ya")){
                     replyToUser(payload.events[0].replyToken, "Masukan keluhan kucingmu");
-                }else if(pesan.equals("tidak")){
+                }else if(msgText.equals("tidak")){
                     replyToUser(payload.events[0].replyToken, "Selamat kucing anda baik baik saja :)");
                 }else{
                     replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");
