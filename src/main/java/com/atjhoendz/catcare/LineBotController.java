@@ -31,14 +31,31 @@ public class LineBotController {
     @Qualifier("lineSignatureValidator")
     private LineSignatureValidator lineSignatureValidator;
 
+    @Autowired
+    @Qualifier("com.linecorp.channel_secret")
+    String lChannelSecret;
+
+    @Autowired
+    @Qualifier("com.linecorp.channel_access_token")
+    String lChannelAccessToken;
+
     @RequestMapping(value="/callback", method = RequestMethod.POST)
     public ResponseEntity<String> callback(
-            @RequestHeader("X-Line-Signature") String xLineSignature,
+            @RequestHeader("X-Line-Signature") String aXLineSignature,
             @RequestBody String eventsPayload)
     {
         try {
-            if(!lineSignatureValidator.validateSignature(eventsPayload.getBytes(), xLineSignature)){
-                throw new RuntimeException("Invalid Signature Validation");
+//            if(!lineSignatureValidator.validateSignature(eventsPayload.getBytes(), xLineSignature)){
+//                throw new RuntimeException("Invalid Signature Validation");
+//            }
+            final String text=String.format("The Signature is: %s",
+                    (aXLineSignature!=null && aXLineSignature.length() > 0) ? aXLineSignature : "N/A");
+            System.out.println(text);
+            final boolean valid=new LineSignatureValidator(lChannelSecret.getBytes()).validateSignature(eventsPayload.getBytes(), aXLineSignature);
+            System.out.println("The signature is: " + (valid ? "valid" : "tidak valid"));
+            if(eventsPayload!=null && eventsPayload.length() > 0)
+            {
+                System.out.println("Payload: " + eventsPayload);
             }
 
             ObjectMapper objectMapper = ModelObjectMapper.createNewObjectMapper();
