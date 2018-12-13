@@ -29,6 +29,7 @@ import java.util.concurrent.ExecutionException;
 public class LineBotController {
 
     ArrayList<String> keluhanUser = new ArrayList<String>();
+    Data data = new Data();
     private String state = "";
 
     @Autowired
@@ -69,8 +70,6 @@ public class LineBotController {
             String msgText = "";
             String idTarget = "";
             String eventType = payload.events[0].type;
-
-            Data data = new Data();
 
             if(eventType.equals("follow")){
                 replyToUser(payload.events[0].replyToken, "Hello Cat Lovers! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberikan solusinya.\n\nApakah kucing anda memiliki keluhan ?");
