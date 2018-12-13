@@ -69,7 +69,7 @@ public class LineBotController {
             if(eventType.equals("follow")){
                 replyToUser(payload.events[0].replyToken, "Hello Cat Lovers! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberikan solusinya.");
                 replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");
-            }else if(eventType.equals("message")){
+            }else if(eventType.equals("messages")){
 
                 String pesan = payload.events[0].message.text;
                 if(pesan.equals("ya")){
