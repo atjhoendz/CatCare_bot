@@ -37,10 +37,10 @@ dependencyManagement {
 
 dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.1.RELEASE'
-	compile('com.google.code.gson:gson:2.8.5')
+	compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
 	compile group: 'com.linecorp.bot', name: 'line-bot-api-client', version: '2.3.0'
 	compile group: 'com.linecorp.bot', name: 'line-bot-model', version: '2.3.0'
-	compile('org.apache.commons:commons-io:2.6')
+	compile group: 'commons-io', name: 'commons-io', version: '2.6'
 	compile('org.springframework.boot:spring-boot-starter-data-rest')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
