@@ -21,11 +21,15 @@ import org.springframework.web.bind.annotation.*;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping(value="/linebot")
 public class LineBotController {
+
+    ArrayList<String> keluhanUser = new ArrayList<String>();
+    private String state = "";
 
     @Autowired
     @Qualifier("lineMessagingClient")
@@ -62,19 +66,35 @@ public class LineBotController {
             Gson gson = new Gson();
             Payload payload = gson.fromJson(eventsPayload, Payload.class);
 
-            String msgText = " ";
-            String idTarget = " ";
+            String msgText = "";
+            String idTarget = "";
             String eventType = payload.events[0].type;
+
+            Data data = new Data();
 
             if(eventType.equals("follow")){
                 replyToUser(payload.events[0].replyToken, "Hello Cat Lovers! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberikan solusinya.\n\nApakah kucing anda memiliki keluhan ?");
             }else if(eventType.equals("message")){
                 msgText = payload.events[0].message.text;
                 msgText = msgText.toLowerCase();
+
                 if(msgText.equals("ya")){
                     replyToUser(payload.events[0].replyToken, "Masukan keluhan kucingmu");
-                }else if(msgText.equals("tidak")){
+                    state = "ya";
+                    keluhanUser.add(msgText);
+                }else if(msgText.equals("tidak") && state.equals("")){
                     replyToUser(payload.events[0].replyToken, "Selamat kucing anda baik baik saja :)");
+                }else if(msgText.equals("tidak") && state.equals("ya")){
+                    String hasil = data.cekKeluhan(keluhanUser);
+                    if(!hasil.equals("sehat")){
+                        replyToUser(payload.events[0].replyToken, "Penyakit kucing anda adalah " + hasil);
+                        state = "";
+                    }else{
+                        replyToUser(payload.events[0].replyToken, "Kucing anda sehat, itu hanya keluhan normal");
+                        state = "";
+                    }
+                }else if(state.equals("ya")){
+                    replyToUser(payload.events[0].replyToken, "Ada keluhan lagi?");
                 }else{
                     replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");
                 }
