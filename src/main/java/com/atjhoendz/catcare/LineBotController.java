@@ -67,10 +67,8 @@ public class LineBotController {
             String eventType = payload.events[0].type;
 
             if(eventType.equals("follow")){
-                replyToUser(payload.events[0].replyToken, "Hello Cat Lovers! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberikan solusinya.");
-                replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");
+                replyToUser(payload.events[0].replyToken, "Hello Cat Lovers! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberikan solusinya.\n\nApakah kucing anda memiliki keluhan ?");
             }else if(eventType.equals("message")){
-
                 msgText = payload.events[0].message.text;
                 msgText = msgText.toLowerCase();
                 if(msgText.equals("ya")){
@@ -102,6 +100,7 @@ public class LineBotController {
         }
         System.out.println(botApiResponse);
     }
+
 
 
     private UserProfileResponse getProfile(String userId){
