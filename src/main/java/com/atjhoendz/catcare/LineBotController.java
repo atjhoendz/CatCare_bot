@@ -86,7 +86,7 @@ public class LineBotController {
                     replyToUser(payload.events[0].replyToken, "Selamat kucing anda baik baik saja :)");
                 }else if(msgText.equals("tidak") && state.equals("ya")){
                     String hasil = data.cekKeluhan(keluhanUser);
-                    if(!hasil.equals("sehat")){
+                    if(!hasil.equals("Sehat")){
                         replyToUser(payload.events[0].replyToken, "Penyakit kucing anda adalah " + hasil);
                         state = "";
                     }else{
