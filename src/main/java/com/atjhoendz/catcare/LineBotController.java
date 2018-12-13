@@ -78,17 +78,17 @@ public class LineBotController {
                         keluhanUser.add(arrMsg[i]);
                     }
                 }else if(msgText.equals("tidak") && state.equals("")){
-//                    replyToUser(payload.events[0].replyToken, "Selamat kucing anda baik baik saja :)");
-                    replyToUser(payload.events[0].replyToken, keluhanUser.toString());
+                    replyToUser(payload.events[0].replyToken, "Selamat kucing anda baik baik saja :)");
                 }else if(msgText.equals("tidak") && state.equals("ya")){
                     String hasil = data.cekKeluhan(keluhanUser);
-                    if(!hasil.equals("Sehat")){
-                        replyToUser(payload.events[0].replyToken, "Penyakit kucing anda adalah " + hasil);
-                        state = "";
-                    }else{
-                        replyToUser(payload.events[0].replyToken, "Kucing anda sehat, itu hanya keluhan normal");
-                        state = "";
-                    }
+//                    if(!hasil.equals("Sehat")){
+//                        replyToUser(payload.events[0].replyToken, "Penyakit kucing anda adalah " + hasil);
+//                        state = "";
+//                    }else{
+//                        replyToUser(payload.events[0].replyToken, "Kucing anda sehat, itu hanya keluhan normal");
+//                        state = "";
+//                    }
+                    replyToUser(payload.events[0].replyToken, keluhanUser.toString());
                 }else if(state.equals("ya")){
                     replyToUser(payload.events[0].replyToken, "Ada keluhan lagi?");
                 }else{
