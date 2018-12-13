@@ -21,10 +21,10 @@ public class Data {
         Set<String> unionList = new HashSet<String>(dataKeluhan);
         unionList.retainAll(keluhanUser);
 
-        if(unionList.isEmpty()){
-            return "Sehat";
-        }else{
+        if(unionList.size() > 3){
             return "Flu";
+        }else{
+            return "Sehat";
         }
     }
 }
