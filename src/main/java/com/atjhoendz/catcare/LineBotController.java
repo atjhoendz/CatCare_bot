@@ -77,12 +77,11 @@ public class LineBotController {
                     for(int i = 0; i < arrMsg.length; i++){
                         keluhanUser.add(arrMsg[i]);
                     }
-                    System.out.println(keluhanUser);
                 }else if(msgText.equals("tidak") && state.equals("")){
-                    replyToUser(payload.events[0].replyToken, "Selamat kucing anda baik baik saja :)");
+//                    replyToUser(payload.events[0].replyToken, "Selamat kucing anda baik baik saja :)");
+                    replyToUser(payload.events[0].replyToken, keluhanUser.toString());
                 }else if(msgText.equals("tidak") && state.equals("ya")){
                     String hasil = data.cekKeluhan(keluhanUser);
-                    System.out.println(hasil);
                     if(!hasil.equals("Sehat")){
                         replyToUser(payload.events[0].replyToken, "Penyakit kucing anda adalah " + hasil);
                         state = "";
