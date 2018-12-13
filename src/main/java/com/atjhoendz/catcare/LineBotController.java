@@ -1,6 +1,8 @@
 package com.atjhoendz.catcare;
 
+import com.google.gson.Gson;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.linecorp.bot.client.LineMessagingClientBuilder;
 import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.client.LineSignatureValidator;
 import com.linecorp.bot.model.ReplyMessage;
@@ -10,11 +12,13 @@ import com.linecorp.bot.model.message.StickerMessage;
 import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.model.objectmapper.ModelObjectMapper;
 import com.linecorp.bot.model.profile.UserProfileResponse;
+import com.linecorp.bot.model.response.BotApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import retrofit2.Response;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
@@ -44,10 +48,7 @@ public class LineBotController {
             @RequestHeader("X-Line-Signature") String aXLineSignature,
             @RequestBody String eventsPayload)
     {
-        try {
-//            if(!lineSignatureValidator.validateSignature(eventsPayload.getBytes(), xLineSignature)){
-//                throw new RuntimeException("Invalid Signature Validation");
-//            }
+
             final String text=String.format("The Signature is: %s",
                     (aXLineSignature!=null && aXLineSignature.length() > 0) ? aXLineSignature : "N/A");
             System.out.println(text);
@@ -58,41 +59,49 @@ public class LineBotController {
                 System.out.println("Payload: " + eventsPayload);
             }
 
-            ObjectMapper objectMapper = ModelObjectMapper.createNewObjectMapper();
-            EventsModel eventsModel = objectMapper.readValue(eventsPayload, EventsModel.class);
-            eventsModel.getEvents().forEach((event)->{
-//                if(event instanceof MessageEvent){
-//                    MessageEvent messageEvent = (MessageEvent) event;
-//                    TextMessageContent textMessageContent = (TextMessageContent) messageEvent.getMessage();
-//                    replyText(messageEvent.getReplyToken(), textMessageContent.getText());
-//                }
-            });
+            Gson gson = new Gson();
+            Payload payload = gson.fromJson(eventsPayload, Payload.class);
+
+            String msgText = " ";
+            String idTarget = " ";
+            String eventType = payload.events[0].type;
+
+            if(eventType.equals("follow")){
+                replyToUser(payload.events[0].replyToken, "Hello Cat Lovers! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberikan solusinya.");
+                replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");
+            }else if(eventType.equals("message")){
+                idTarget = payload.events[0].source.getSenderId();
+                String pesan = payload.events[0].txtmessage.getMessage().getText().toLowerCase();
+                if(pesan.equals("ya")){
+                    replyToUser(payload.events[0].replyToken, "Masukan keluhan kucingmu");
+                }else if(pesan.equals("tidak")){
+                    replyToUser(payload.events[0].replyToken, "Selamat kucing anda baik baik saja :)");
+                }else{
+                    replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");
+                }
+            }
+
             return new ResponseEntity<>(HttpStatus.OK);
-        }catch (IOException e){
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
     }
 
-    private void reply(ReplyMessage replyMessage){
-        try{
-            lineMessagingClient.replyMessage(replyMessage).get();
-        }catch (InterruptedException | ExecutionException e){
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void replyText(String replyToken, String messageToUser){
+    private void replyToUser(String rToken, String messageToUser){
         TextMessage textMessage = new TextMessage(messageToUser);
-        ReplyMessage replyMessage = new ReplyMessage(replyToken, textMessage);
-        reply(replyMessage);
+        ReplyMessage replyMessage = new ReplyMessage(rToken, textMessage);
+        final LineMessagingClient client = LineMessagingClient
+                .builder(lChannelAccessToken)
+                .build();
+
+        final BotApiResponse botApiResponse;
+        try{
+            botApiResponse = client.replyMessage(replyMessage).get();
+        }catch(InterruptedException | ExecutionException e){
+            System.out.println("Exception is raised");
+            e.printStackTrace();
+            return;
+        }
+        System.out.println(botApiResponse);
     }
 
-    private void replySticker(String replyToken, String packageId, String stickerId){
-        StickerMessage stickerMessage = new StickerMessage(packageId, stickerId);
-        ReplyMessage replyMessage = new ReplyMessage(replyToken, stickerMessage);
-        reply(replyMessage);
-    }
 
     private UserProfileResponse getProfile(String userId){
         try{
