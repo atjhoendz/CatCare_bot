@@ -5,6 +5,7 @@ import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.client.LineSignatureValidator;
 import com.linecorp.bot.model.ReplyMessage;
 import com.linecorp.bot.model.message.TextMessage;
+import com.linecorp.bot.model.message.quickreply.QuickReply;
 import com.linecorp.bot.model.profile.UserProfileResponse;
 import com.linecorp.bot.model.response.BotApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,11 +90,14 @@ public class LineBotController {
                     replyToUser(payload.events[0].replyToken, "Selamat kucing anda baik baik saja :)");
                 }else if(ans.equals("tidak") && state.equals("adakeluhan")){
                     String hasil = data.cekKeluhan(keluhanUser);
-                    if(!hasil.equals("Sehat")){
-                        replyToUser(payload.events[0].replyToken, "Penyakit kucing anda adalah " + hasil);
+                    if(hasil.equals("unknown")){
+                        replyToUser(payload.events[0].replyToken, "Mohon maaf kak, Belum ada data yang cocok terhadap keluhan-keluhan tersebut :)");
+                        state = "";
+                    }else if(hasil.equals("Sehat")){
+                        replyToUser(payload.events[0].replyToken, "Kucing anda sehat, itu hanya keluhan normal");
                         state = "";
                     }else{
-                        replyToUser(payload.events[0].replyToken, "Kucing anda sehat, itu hanya keluhan normal");
+                        replyToUser(payload.events[0].replyToken, "Penyakit kucing anda adalah " + hasil);
                         state = "";
                     }
                     keluhanUser.clear();
@@ -107,11 +111,13 @@ public class LineBotController {
                     replyToUser(payload.events[0].replyToken, "Hallo, \nApakah kucing anda memiliki keluhan?");
                     state = "";
                 }else if(ans.equals("unknown")){
-                    replyToUser(payload.events[0].replyToken, "Pesan yang anda kirimkan belum ada di memori saya kak.\n Jadi, apakah kucing anda memiliki keluhan?");
+                    replyToUser(payload.events[0].replyToken, "Pesan yang anda kirimkan belum ada di memori saya kak.\nJadi, apakah kucing anda memiliki keluhan?");
                 }else if(ans.equals("bingung")){
-                    replyToUser(payload.events[0].replyToken, "Iya seperti itu kak,\n Apakah kucing anda memiliki keluhan?");
+                    replyToUser(payload.events[0].replyToken, "Iya seperti itu kak,\nApakah kucing anda memiliki keluhan?");
                 }else if(ans.equals("author")){
-                    replyToUser(payload.events[0].replyToken, "Pembuat saya adalah \n Mohamad Achun Armando (140810170020) \n\n Data kucing dari \n Refa Annisatul ilmi (140810170060)");
+                    replyToUser(payload.events[0].replyToken, "Pembuat saya adalah \n Mohamad Achun Armando (140810170020) \n\n Data kucing dari \n Refa Annisatul Ilma (140810170060)");
+                }else if(ans.equals("myname")){
+                    replyToUser(payload.events[0].replyToken, "Dia adalah pembuat saya bernama lengkap Mohamad Achun Armando");
                 }
                 else{
                     replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");
@@ -137,6 +143,10 @@ public class LineBotController {
             return;
         }
         System.out.println(botApiResponse);
+    }
+
+    private void quickReply(String rToken, String messageToUser){
+
     }
 
 
