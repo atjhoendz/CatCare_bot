@@ -9,7 +9,7 @@ public class DataMessage {
     private String sapa[] = {"hai", "hello", "test"};
     private String thanks[] = {"terima", "kasih", "thank", "thanks", "oke", "ok", "okay", "sip", "nuhun"};
     private String bingung[] = {"hah?", "hah", "ha", "hih", "apa?"};
-    private String author[] = {"ngebikin", "bikin", "ngebuat", "pembuat"};
+    private String author[] = {"ngebikin?", "bikin?", "ngebuat?", "pembuat"};
     private String answer = "";
 
     Map<String, List<String>> jawaban = new HashMap<String, List<String>>();

@@ -111,7 +111,7 @@ public class LineBotController {
                 }else if(ans.equals("bingung")){
                     replyToUser(payload.events[0].replyToken, "Iya seperti itu kak,\n Apakah kucing anda memiliki keluhan?");
                 }else if(ans.equals("author")){
-                    replyToUser(payload.events[0].replyToken, "Pembuat saya adalah \n Mohamad Achun Armando (140810170020) \n Data kucing dari \n Refa Annisatul ilmi (140810170060)");
+                    replyToUser(payload.events[0].replyToken, "Pembuat saya adalah \n Mohamad Achun Armando (140810170020) \n\n Data kucing dari \n Refa Annisatul ilmi (140810170060)");
                 }
                 else{
                     replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");
