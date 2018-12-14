@@ -13,8 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -22,7 +23,9 @@ import java.util.concurrent.ExecutionException;
 public class LineBotController {
 
     ArrayList<String> keluhanUser = new ArrayList<String>();
-    Data data = new Data();
+    ArrayList<String> listJawaban = new ArrayList<String>();
+    DataKeluhan data = new DataKeluhan();
+    DataMessage jawabanMasuk = new DataMessage();
     private String state = "";
 
     @Autowired
@@ -71,17 +74,19 @@ public class LineBotController {
                 msgText = msgText.toLowerCase();
                 String[] arrMsg = msgText.split(" ");
 
-                if(msgText.equals("ya")){
+                listJawaban.addAll(Arrays.asList(arrMsg));
+                String ans = jawabanMasuk.cekJawaban(listJawaban);
+
+
+                if(ans.equals("ya")){
                     replyToUser(payload.events[0].replyToken, "Masukan keluhan kucingmu");
                     state = "adakeluhan";
-                }else if(state.equals("adakeluhan") && !msgText.equals("tidak") && !msgText.equals("ya")){
-                    for(int i = 0; i < arrMsg.length; i++){
-                        keluhanUser.add(arrMsg[i]);
-                    }
+                }else if(state.equals("adakeluhan") && !ans.equals("tidak") && !ans.equals("ya")){
+                    keluhanUser.addAll(Arrays.asList(arrMsg));
                     replyToUser(payload.events[0].replyToken, "Ada keluhan lagi?");
-                }else if(msgText.equals("tidak") && state.equals("")){
+                }else if(ans.equals("tidak") && state.equals("")){
                     replyToUser(payload.events[0].replyToken, "Selamat kucing anda baik baik saja :)");
-                }else if(msgText.equals("tidak") && state.equals("adakeluhan")){
+                }else if(ans.equals("tidak") && state.equals("adakeluhan")){
                     String hasil = data.cekKeluhan(keluhanUser);
                     if(!hasil.equals("Sehat")){
                         replyToUser(payload.events[0].replyToken, "Penyakit kucing anda adalah " + hasil);
@@ -90,7 +95,17 @@ public class LineBotController {
                         replyToUser(payload.events[0].replyToken, "Kucing anda sehat, itu hanya keluhan normal");
                         state = "";
                     }
-                }else{
+                }else if(ans.equals("tidakSopan")){
+                    replyToUser(payload.events[0].replyToken, "Tidak sopan kamu ferguso, dasar " + msgText);
+                    state = "";
+                }else if(ans.equals("thanks")){
+                    replyToUser(payload.events[0].replyToken, "Sama sama kak :)\n\n Semoga lekas sembuh kucingnyaa (love)");
+                    state = "";
+                }else if(ans.equals("sapa")){
+                    replyToUser(payload.events[0].replyToken, "Hallo, \nApakah kucing anda memiliki keluhan?");
+                    state = "";
+                }
+                else{
                     replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");
                 }
             }
