@@ -21,6 +21,7 @@ import java.util.concurrent.ExecutionException;
 @RequestMapping(value="/linebot")
 public class LineBotController {
 
+    ArrayList<String> keluhanUser = new ArrayList<String>();
     DataKeluhan data = new DataKeluhan();
     DataMessage jawabanMasuk = new DataMessage();
     private String state = "";
@@ -69,7 +70,6 @@ public class LineBotController {
                 replyToUser(payload.events[0].replyToken, "Hello Cat Lovers! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberikan solusinya.\n\nApakah kucing anda memiliki keluhan ?");
             }else if(eventType.equals("message")){
                 ArrayList<String> listJawaban = new ArrayList<String>();
-                ArrayList<String> keluhanUser = new ArrayList<String>();
 
                 msgText = payload.events[0].message.text;
                 msgText = msgText.toLowerCase();
@@ -96,6 +96,7 @@ public class LineBotController {
                         replyToUser(payload.events[0].replyToken, "Kucing anda sehat, itu hanya keluhan normal");
                         state = "";
                     }
+                    keluhanUser.clear();
                 }else if(ans.equals("tidakSopan")){
                     replyToUser(payload.events[0].replyToken, "Tidak sopan kamu ferguso, dasar " + msgText);
                     state = "";
@@ -106,7 +107,11 @@ public class LineBotController {
                     replyToUser(payload.events[0].replyToken, "Hallo, \nApakah kucing anda memiliki keluhan?");
                     state = "";
                 }else if(ans.equals("unknown")){
-                    replyToUser(payload.events[0].replyToken, "Hallo, \nApakah kucing anda memiliki keluhan?" + ans);
+                    replyToUser(payload.events[0].replyToken, "Pesan yang anda kirimkan belum ada di memori saya kak.\n Jadi, apakah kucing anda memiliki keluhan?");
+                }else if(ans.equals("bingung")){
+                    replyToUser(payload.events[0].replyToken, "Iya seperti itu kak,\n Apakah kucing anda memiliki keluhan?");
+                }else if(ans.equals("author")){
+                    replyToUser(payload.events[0].replyToken, "Pembuat saya adalah \n Mohamad Achun Armando (140810170020) \n Data kucing dari \n Refa Annisatul ilmi (140810170060)");
                 }
                 else{
                     replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");

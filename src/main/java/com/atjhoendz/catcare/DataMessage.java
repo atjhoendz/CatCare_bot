@@ -8,6 +8,8 @@ public class DataMessage {
     private String tidakSopan[] = {"bodo", "bodoh", "bacot", "bct"};
     private String sapa[] = {"hai", "hello", "test"};
     private String thanks[] = {"terima", "kasih", "thank", "thanks", "oke", "ok", "okay", "sip", "nuhun"};
+    private String bingung[] = {"hah?", "hah", "ha", "hih", "apa?"};
+    private String author[] = {"ngebikin", "bikin", "ngebuat", "pembuat"};
     private String answer = "";
 
     Map<String, List<String>> jawaban = new HashMap<String, List<String>>();
@@ -18,18 +20,16 @@ public class DataMessage {
         List<String> listTsopan = new ArrayList<String>(Arrays.asList(tidakSopan));
         List<String> listSapa = new ArrayList<String>(Arrays.asList(sapa));
         List<String> listThanks = new ArrayList<String>(Arrays.asList(thanks));
-
-//        listYa.addAll(Arrays.asList(ya));
-//        listTidak.addAll(Arrays.asList(tidak));
-//        listTsopan.addAll(Arrays.asList(tidakSopan));
-//        listSapa.addAll(Arrays.asList(sapa));
-//        listThanks.addAll(Arrays.asList(thanks));
+        List<String> listBingung = new ArrayList<String>(Arrays.asList(bingung));
+        List<String> listAuth = new ArrayList<String>(Arrays.asList(author));
 
         jawaban.put("ya", listYa);
         jawaban.put("tidak", listTidak);
         jawaban.put("tidakSopan", listTsopan);
         jawaban.put("sapa", listSapa);
         jawaban.put("thanks", listThanks);
+        jawaban.put("author", listAuth);
+        jawaban.put("bingung", listBingung);
     }
 
     public String cekJawaban(ArrayList<String> jawab){
