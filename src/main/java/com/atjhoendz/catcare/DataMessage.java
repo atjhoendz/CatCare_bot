@@ -8,6 +8,7 @@ public class DataMessage {
     private String tidakSopan[] = {"bodo", "bodoh", "bacot", "bct"};
     private String sapa[] = {"hai", "hello", "test"};
     private String thanks[] = {"terima", "kasih", "thank", "thanks", "oke", "ok", "okay", "sip", "nuhun"};
+    private String answer = "";
 
     Map<String, List<String>> jawaban = new HashMap<String, List<String>>();
 
@@ -17,7 +18,7 @@ public class DataMessage {
         List<String> listTsopan = new ArrayList<String>(Arrays.asList(tidakSopan));
         List<String> listSapa = new ArrayList<String>(Arrays.asList(sapa));
         List<String> listThanks = new ArrayList<String>(Arrays.asList(thanks));
-        
+
         jawaban.put("ya", listYa);
         jawaban.put("tidak", listTidak);
         jawaban.put("tidakSopan", listTsopan);
@@ -32,12 +33,12 @@ public class DataMessage {
             Set<String> irisanValue = new HashSet<String>(value);
             irisanValue.retainAll(jawab);
             if(irisanValue.size() > 0){
-                return key;
+                this.answer = key;
             }else{
-                return "unknown";
+                this.answer = "unknown";
             }
         }
-        return "unknown";
+        return this.answer;
     }
 
 }
