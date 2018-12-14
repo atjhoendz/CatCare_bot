@@ -13,17 +13,17 @@ public class DataMessage {
     Map<String, List<String>> jawaban = new HashMap<String, List<String>>();
 
     public DataMessage(){
-        List<String> listYa = new ArrayList<String>();
-        List<String> listTidak = new ArrayList<String>();
-        List<String> listTsopan = new ArrayList<String>();
-        List<String> listSapa = new ArrayList<String>();
-        List<String> listThanks = new ArrayList<String>();
+        List<String> listYa = new ArrayList<String>(Arrays.asList(ya));
+        List<String> listTidak = new ArrayList<String>(Arrays.asList(tidak));
+        List<String> listTsopan = new ArrayList<String>(Arrays.asList(tidakSopan));
+        List<String> listSapa = new ArrayList<String>(Arrays.asList(sapa));
+        List<String> listThanks = new ArrayList<String>(Arrays.asList(thanks));
 
-        listYa.addAll(Arrays.asList(ya));
-        listTidak.addAll(Arrays.asList(tidak));
-        listTsopan.addAll(Arrays.asList(tidakSopan));
-        listSapa.addAll(Arrays.asList(sapa));
-        listThanks.addAll(Arrays.asList(thanks));
+//        listYa.addAll(Arrays.asList(ya));
+//        listTidak.addAll(Arrays.asList(tidak));
+//        listTsopan.addAll(Arrays.asList(tidakSopan));
+//        listSapa.addAll(Arrays.asList(sapa));
+//        listThanks.addAll(Arrays.asList(thanks));
 
         jawaban.put("ya", listYa);
         jawaban.put("tidak", listTidak);

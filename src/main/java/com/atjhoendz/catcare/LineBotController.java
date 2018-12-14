@@ -21,8 +21,6 @@ import java.util.concurrent.ExecutionException;
 @RequestMapping(value="/linebot")
 public class LineBotController {
 
-    ArrayList<String> keluhanUser = new ArrayList<String>();
-
     DataKeluhan data = new DataKeluhan();
     DataMessage jawabanMasuk = new DataMessage();
     private String state = "";
@@ -70,10 +68,13 @@ public class LineBotController {
             if(eventType.equals("follow")){
                 replyToUser(payload.events[0].replyToken, "Hello Cat Lovers! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberikan solusinya.\n\nApakah kucing anda memiliki keluhan ?");
             }else if(eventType.equals("message")){
+                ArrayList<String> listJawaban = new ArrayList<String>();
+                ArrayList<String> keluhanUser = new ArrayList<String>();
+
                 msgText = payload.events[0].message.text;
                 msgText = msgText.toLowerCase();
                 String[] arrMsg = msgText.split(" ");
-                ArrayList<String> listJawaban = new ArrayList<String>();
+
                 listJawaban.addAll(Arrays.asList(arrMsg));
                 String ans = jawabanMasuk.cekJawaban(listJawaban);
 
