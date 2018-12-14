@@ -22,7 +22,7 @@ import java.util.concurrent.ExecutionException;
 public class LineBotController {
 
     ArrayList<String> keluhanUser = new ArrayList<String>();
-    ArrayList<String> listJawaban = new ArrayList<String>();
+
     DataKeluhan data = new DataKeluhan();
     DataMessage jawabanMasuk = new DataMessage();
     private String state = "";
@@ -66,13 +66,14 @@ public class LineBotController {
             String idTarget = "";
             String eventType = payload.events[0].type;
 
+
             if(eventType.equals("follow")){
                 replyToUser(payload.events[0].replyToken, "Hello Cat Lovers! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberikan solusinya.\n\nApakah kucing anda memiliki keluhan ?");
             }else if(eventType.equals("message")){
                 msgText = payload.events[0].message.text;
                 msgText = msgText.toLowerCase();
                 String[] arrMsg = msgText.split(" ");
-
+                ArrayList<String> listJawaban = new ArrayList<String>();
                 listJawaban.addAll(Arrays.asList(arrMsg));
                 String ans = jawabanMasuk.cekJawaban(listJawaban);
 
