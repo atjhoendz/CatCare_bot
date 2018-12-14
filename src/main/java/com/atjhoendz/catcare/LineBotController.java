@@ -83,6 +83,7 @@ public class LineBotController {
                 if(ans.equals("ya")){
                     replyToUser(payload.events[0].replyToken, "Masukan keluhan kucingmu");
                     state = "adakeluhan";
+                    ans = "";
                 }else if(state.equals("adakeluhan") && !ans.equals("tidak") && !ans.equals("ya")){
                     keluhanUser.addAll(Arrays.asList(arrMsg));
                     replyToUser(payload.events[0].replyToken, "Ada keluhan lagi?");
