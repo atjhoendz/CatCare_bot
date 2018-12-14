@@ -104,7 +104,7 @@ public class LineBotController {
                     replyToUser(payload.events[0].replyToken, "Hallo, \nApakah kucing anda memiliki keluhan?");
                     state = "";
                 }else if(ans.equals("unknown")){
-                    replyToUser(payload.events[0].replyToken, "Hallo, \nApakah kucing anda memiliki keluhan?");
+                    replyToUser(payload.events[0].replyToken, "Hallo, \nApakah kucing anda memiliki keluhan?" + ans);
                 }
                 else{
                     replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");

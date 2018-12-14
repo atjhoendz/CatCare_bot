@@ -40,6 +40,7 @@ public class DataMessage {
             irisanValue.retainAll(jawab);
             if(irisanValue.size() > 0){
                 this.answer = key;
+                break;
             }else{
                 this.answer = "unknown";
             }
