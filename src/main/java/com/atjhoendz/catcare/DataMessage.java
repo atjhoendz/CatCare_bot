@@ -10,13 +10,14 @@ public class DataMessage {
     private String thanks[] = {"terima", "kasih", "thank", "thanks", "oke", "ok", "okay", "sip", "nuhun"};
 
     Map<String, List<String>> jawaban = new HashMap<String, List<String>>();
-    List<String> listYa = new ArrayList<String>(Arrays.asList(ya));
-    List<String> listTidak = new ArrayList<String>(Arrays.asList(tidak));
-    List<String> listTsopan = new ArrayList<String>(Arrays.asList(tidakSopan));
-    List<String> listSapa = new ArrayList<String>(Arrays.asList(sapa));
-    List<String> listThanks = new ArrayList<String>(Arrays.asList(thanks));
 
     public DataMessage(){
+        List<String> listYa = new ArrayList<String>(Arrays.asList(ya));
+        List<String> listTidak = new ArrayList<String>(Arrays.asList(tidak));
+        List<String> listTsopan = new ArrayList<String>(Arrays.asList(tidakSopan));
+        List<String> listSapa = new ArrayList<String>(Arrays.asList(sapa));
+        List<String> listThanks = new ArrayList<String>(Arrays.asList(thanks));
+        
         jawaban.put("ya", listYa);
         jawaban.put("tidak", listTidak);
         jawaban.put("tidakSopan", listTsopan);

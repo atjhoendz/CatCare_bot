@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -104,6 +103,8 @@ public class LineBotController {
                 }else if(ans.equals("sapa")){
                     replyToUser(payload.events[0].replyToken, "Hallo, \nApakah kucing anda memiliki keluhan?");
                     state = "";
+                }else if(ans.equals("unknown")){
+                    replyToUser(payload.events[0].replyToken, "Hallo, \nApakah kucing anda memiliki keluhan?" + arrMsg.toString());
                 }
                 else{
                     replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");
