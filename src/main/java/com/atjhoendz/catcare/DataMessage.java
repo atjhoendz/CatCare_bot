@@ -5,9 +5,9 @@ import java.util.*;
 public class DataMessage {
     private String ya[] = {"iya", "y", "betul", "ada", "ya", "punya"};
     private String tidak[] = {"t", "tidak", "g", "engga", "ga"};
-    private String tidakSopan[] = {"bodo", "bodoh", "bacot", "bct"};
-    private String sapa[] = {"hai", "hello", "test"};
-    private String thanks[] = {"terima", "kasih", "thank", "thanks", "oke", "ok", "okay", "sip", "nuhun"};
+    private String tidakSopan[] = {"bodo", "bodoh", "bacot", "bct", "bangsat", "ccd", "bngst"};
+    private String sapa[] = {"hai", "hello", "test", "halo", "test"};
+    private String thanks[] = {"terima", "kasih", "thank", "thanks", "oke", "ok", "okay", "sip", "nuhun", "makasih"};
     private String bingung[] = {"hah?", "hah", "ha", "hih", "apa?"};
     private String author[] = {"ngebikin?", "bikin?", "ngebuat?", "pembuat"};
     private String answer = "";
