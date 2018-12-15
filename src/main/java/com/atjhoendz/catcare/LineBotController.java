@@ -104,7 +104,7 @@ public class LineBotController {
                         replyToUser(payload.events[0].replyToken, "Kucing anda sehat, itu hanya keluhan normal");
                         state = "";
                     }else{
-                        replyToUser(payload.events[0].replyToken, "Penyakit kucing anda adalah " + hasil);
+                        replyToUser(payload.events[0].replyToken, "Penyakit kucing anda adalah " + hasil + "\n\nOptions:\n- penyakit namaPenyakit = Untuk melihat penjelasan dari setiap penyakit.");
                         state = "";
                     }
                     keluhanUser.clear();
@@ -138,7 +138,7 @@ public class LineBotController {
                     }else if(detailPenyakit.equals("")){
                         replyToUser(payload.events[0].replyToken, "Detail penyakit belum ada di data CatCare.\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.\n- list = Untuk melihat data penyakit yang ada di CatCare.");
                     }else{
-                        replyToUser(payload.events[0].replyToken, "Penjelasan penyakit " + arrMsg[1] + ": \n\n" + detailPenyakit);
+                        replyToUser(payload.events[0].replyToken, "Penjelasan penyakit " + arrMsg[1] + ": \n\n" + detailPenyakit + "\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.\n- list = Untuk melihat data penyakit yang ada di CatCare.");
                     }
                     state = "";
                 }
