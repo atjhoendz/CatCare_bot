@@ -53,6 +53,17 @@ public class DataKeluhan {
         dataPenyakit.put("Ankilostomiosis", kAnki);
         dataPenyakit.put("Phthiriasis", kPhth);
         dataPenyakit.put("Pedikulosis", kPedi);
+
+        detailPenyakit.put("Flu", detailFlu);
+        detailPenyakit.put("Cacingan", detailCacingan);
+        detailPenyakit.put("Koksidiosis", detailKoksidiosis);
+        detailPenyakit.put("Tripanosomiasis", detailTripanosomiasis);
+        detailPenyakit.put("Hepatozoonosis", detailHepatozoonosis);
+        detailPenyakit.put("Babesiosis", detailBabesiosis);
+        detailPenyakit.put("Distemper", detailDistemper);
+        detailPenyakit.put("Ankilostomiosis", detailAnkilostomiosis);
+        detailPenyakit.put("Phthiriasis", detailPhthiriasis);
+        detailPenyakit.put("Pedikulosis", detailPedikulosis);
     }
 
     public String cekKeluhan(ArrayList<String> keluhan){
@@ -85,7 +96,7 @@ public class DataKeluhan {
     }
 
     public String detailPenyakit(DataKeluhan data, String namaPenyakit){
-        String detPenyakit = "";
+        String detPenyakit = "Belum ada data";
         for (Map.Entry<String, String> entry : data.detailPenyakit.entrySet()){
             String keyNamaPenyakit = entry.getKey().toLowerCase();
             String detail = entry.getValue();
@@ -93,7 +104,7 @@ public class DataKeluhan {
                 detPenyakit = detail;
                 break;
             }else{
-                detPenyakit = "Belum ada data";
+                detPenyakit = "unknown";
             }
         }
         return detPenyakit;

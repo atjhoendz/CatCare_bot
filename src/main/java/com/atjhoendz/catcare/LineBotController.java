@@ -133,7 +133,13 @@ public class LineBotController {
                     state = "";
                 }else if(arrMsg[0].equals("penyakit")){
                     detailPenyakit = data.detailPenyakit(data, arrMsg[1]);
-                    replyToUser(payload.events[0].replyToken, "Penjelasan penyakit " + arrMsg[1] + ": \n\n" + detailPenyakit);
+                    if(detailPenyakit.equals("unknown")){
+                        replyToUser(payload.events[0].replyToken, "Penyakit yang anda masukan belum ada di data CatCare.\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.\n- list = Untuk melihat data penyakit yang ada di CatCare.");
+                    }else if(detailPenyakit.equals("")){
+                        replyToUser(payload.events[0].replyToken, "Detail penyakit belum ada di data CatCare.\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.\n- list = Untuk melihat data penyakit yang ada di CatCare.");
+                    }else{
+                        replyToUser(payload.events[0].replyToken, "Penjelasan penyakit " + arrMsg[1] + ": \n\n" + detailPenyakit);
+                    }
                     state = "";
                 }
                 else if(ans.equals("unknown")){
