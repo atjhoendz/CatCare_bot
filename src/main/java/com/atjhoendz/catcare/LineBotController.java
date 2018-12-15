@@ -80,7 +80,7 @@ public class LineBotController {
                 String ans = jawabanMasuk.cekJawaban(listJawaban);
 
 
-                if(ans.equals("ya") && state.equals("")){
+                if(ans.equals("ya")){
                     replyToUser(payload.events[0].replyToken, "Masukan keluhan kucingmu");
                     state = "adakeluhan";
                     ans = "";
