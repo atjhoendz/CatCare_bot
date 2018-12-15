@@ -5,7 +5,7 @@ import java.util.*;
 public class DataKeluhan {
 
     private String flu[]={"nafsu", "makan", "berkurang", "demam", "bersin", "batuk"};
-    private String cacingan = "kotoran kucing ada cacingnya muntah ada cacingnya tidak nafsu makan perut membuncit tidak wajar badan kurus selalu merasa haus kucing diare atau mencret makan banyak tapi badan tetap kurus";
+    private String cacingan = "kotoran muntah cacing cacingnya tidak nafsu perut membuncit wajar badan kurus haus diare mencret makan banyak tapi badan tetap kurus";
     private String arrCacingan[] = cacingan.split(" ");
 
     Map<String, List<String>> dataPenyakit = new HashMap<String, List<String>>();

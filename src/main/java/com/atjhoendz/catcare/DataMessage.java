@@ -3,7 +3,7 @@ package com.atjhoendz.catcare;
 import java.util.*;
 
 public class DataMessage {
-    private String ya[] = {"iya", "y", "betul", "ada", "ya", "punya"};
+    private String ya[] = {"iya", "y", "benar", "betul", "ada", "ya", "punya"};
     private String tidak[] = {"t", "tidak", "g", "engga", "ga"};
     private String tidakSopan[] = {"bodo", "bodoh", "bacot", "bct", "bangsat", "ccd", "bngst"};
     private String sapa[] = {"hai", "hello", "test", "halo"};
