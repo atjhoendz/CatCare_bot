@@ -87,7 +87,7 @@ public class DataKeluhan {
     public String detailPenyakit(DataKeluhan data, String namaPenyakit){
         String detPenyakit = "";
         for (Map.Entry<String, String> entry : data.detailPenyakit.entrySet()){
-            String keyNamaPenyakit = entry.getKey();
+            String keyNamaPenyakit = entry.getKey().toLowerCase();
             String detail = entry.getValue();
             if(keyNamaPenyakit.equals(namaPenyakit)){
                 detPenyakit = detail;

@@ -133,7 +133,7 @@ public class LineBotController {
                     state = "";
                 }else if(arrMsg[0].equals("penyakit")){
                     detailPenyakit = data.detailPenyakit(data, arrMsg[1]);
-                    replyToUser(payload.events[0].replyToken, "Penjelasan penyakit " + arrMsg[0] + ": \n\n" + detailPenyakit);
+                    replyToUser(payload.events[0].replyToken, "Penjelasan penyakit " + arrMsg[1] + ": \n\n" + detailPenyakit);
                     state = "";
                 }
                 else if(ans.equals("unknown")){
