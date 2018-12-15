@@ -112,7 +112,7 @@ public class LineBotController {
                     replyToUser(payload.events[0].replyToken, "Sama sama kak :)\n\n Semoga lekas sembuh kucingnyaa "+ emojiLove +"\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.");
                     state = "";
                 }else if(ans.equals("sapa")){
-                    replyToUser(payload.events[0].replyToken, "Halo" + namaUser + ", \nApakah kucing anda memiliki keluhan?");
+                    replyToUser(payload.events[0].replyToken, "Halo " + namaUser + ", \nApakah kucing anda memiliki keluhan?");
                     state = "";
                 }else if(ans.equals("unknown")){
                     replyToUser(payload.events[0].replyToken, "Haii silahkan pilih opsinya kak :)\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.");
