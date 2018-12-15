@@ -73,7 +73,7 @@ public class LineBotController {
 
 
             if(eventType.equals("follow")){
-                replyToUser(payload.events[0].replyToken, "Hello Cat Lovers "+ emojiKucing+"! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberitahukan penyakit yang berkaitan dengan keluhan tersebut.\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.");
+                replyToUser(payload.events[0].replyToken, "Hello Cat Lovers "+ emojiKucing+"! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberitahukan penyakit yang berkaitan dengan keluhan tersebut.\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.\n- list = Untuk melihat data penyakit yang ada di CatCare.");
             }else if(eventType.equals("message")){
                 ArrayList<String> listJawaban = new ArrayList<String>();
 
@@ -136,7 +136,7 @@ public class LineBotController {
                     replyToUser(payload.events[0].replyToken, "List Penyakit : \n"+listPenyakit.toString());
                 }
                 else{
-                    replyToUser(payload.events[0].replyToken, "Haii silahkan pilih opsinya kak :)\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.\n- list = Untuk melihat data penyakit yang ada di CatCare.");
+                    replyToUser(payload.events[0].replyToken, "Haii silahkan pilih opsinya kak :)\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.\n- list = Untuk melihat data penyakit yang ada di CatCare." + msgText);
                 }
             }
 
