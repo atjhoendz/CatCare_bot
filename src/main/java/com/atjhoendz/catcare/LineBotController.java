@@ -68,7 +68,7 @@ public class LineBotController {
 
 
             if(eventType.equals("follow")){
-                replyToUser(payload.events[0].replyToken, "Hello Cat Lovers! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberikan solusinya.\n\nApakah kucing anda memiliki keluhan ?");
+                replyToUser(payload.events[0].replyToken, "Hello Cat Lovers 0x10005F! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberikan solusinya.\n\nApakah kucing anda memiliki keluhan ?");
             }else if(eventType.equals("message")){
                 ArrayList<String> listJawaban = new ArrayList<String>();
 
@@ -103,10 +103,10 @@ public class LineBotController {
                     }
                     keluhanUser.clear();
                 }else if(ans.equals("tidakSopan")){
-                    replyToUser(payload.events[0].replyToken, "Tidak sopan kamu ferguso, dasar " + msgText);
+                    replyToUser(payload.events[0].replyToken, "Tidak sopan kamu ferguso, dasar " + msgText + "\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.");
                     state = "";
                 }else if(ans.equals("thanks")){
-                    replyToUser(payload.events[0].replyToken, "Sama sama kak :)\n\n Semoga lekas sembuh kucingnyaa (love)");
+                    replyToUser(payload.events[0].replyToken, "Sama sama kak :)\n\n Semoga lekas sembuh kucingnyaa 0x100037\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.");
                     state = "";
                 }else if(ans.equals("sapa")){
                     replyToUser(payload.events[0].replyToken, "Hallo, \nApakah kucing anda memiliki keluhan?");
@@ -118,17 +118,17 @@ public class LineBotController {
                     replyToUser(payload.events[0].replyToken, "Iya seperti itu kak,\nApakah kucing anda memiliki keluhan?");
                     state = "";
                 }else if(ans.equals("author")){
-                    replyToUser(payload.events[0].replyToken, "Pembuat saya adalah \n Mohamad Achun Armando (140810170020) \n\n Data kucing dari \n Refa Annisatul Ilma (140810170060)");
+                    replyToUser(payload.events[0].replyToken, "Pembuat saya adalah \n Mohamad Achun Armando (140810170020) \n\n Data kucing dari \n Refa Annisatul Ilma (140810170060).\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.");
                     state = "";
                 }else if(ans.equals("myname")){
-                    replyToUser(payload.events[0].replyToken, "Dia adalah pembuat saya bernama lengkap Mohamad Achun Armando");
+                    replyToUser(payload.events[0].replyToken, "Dia adalah pembuat saya bernama lengkap Mohamad Achun Armando.\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.");
                     state = "";
                 }else if(ans.equals("help")){
-                    replyToUser(payload.events[0].replyToken, "Selamat Datang di CatCare,\nCatCare adalah bot untuk mengetahui penyakit dari keluhan-keluhan yang dialami oleh kucing kesayanganmu.\n\nOptions :\n- help/h/bantuan = menampilkan bantuan/teks ini.\n- care = Untuk memulai konsultasi dengan CatCare.\n\nBot ini dibuat untuk memenuhi project tugas akhir mata kuliah Pemrograman Berorientasi Objek. Mohon maaf apabila hasil konsultasi yang kurang maksimal atau tidak sesuai itu dikarenakan minimnya data yang kita miliki.\n\nAnggota Kelompok : \nMohamad Achun Armando (140810170020)\nRefa Annisatul Ilma (140810170060)\n\nTeknik Informatika '17\nUniversitas Padjadjaran");
+                    replyToUser(payload.events[0].replyToken, "Selamat Datang di CatCare,\nCatCare adalah bot untuk mengetahui penyakit dari keluhan-keluhan yang dialami oleh kucing kesayanganmu.\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.\n\nBot ini dibuat untuk memenuhi project tugas akhir mata kuliah Pemrograman Berorientasi Objek. Mohon maaf apabila hasil konsultasi yang kurang maksimal atau tidak sesuai itu dikarenakan minimnya data yang kita miliki.\n\nAnggota Kelompok : \nMohamad Achun Armando (140810170020)\nRefa Annisatul Ilma (140810170060)\n\nTeknik Informatika '17\nUniversitas Padjadjaran");
                     state = "";
                 }
                 else{
-                    replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");
+                    replyToUser(payload.events[0].replyToken, "Haii silahkan pilih opsinya kak :)\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.");
                 }
             }
 
