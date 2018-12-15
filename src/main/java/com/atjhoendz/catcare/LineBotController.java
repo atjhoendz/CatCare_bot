@@ -5,7 +5,6 @@ import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.client.LineSignatureValidator;
 import com.linecorp.bot.model.ReplyMessage;
 import com.linecorp.bot.model.message.TextMessage;
-import com.linecorp.bot.model.message.quickreply.QuickReply;
 import com.linecorp.bot.model.profile.UserProfileResponse;
 import com.linecorp.bot.model.response.BotApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +69,7 @@ public class LineBotController {
             String userId = payload.events[0].source.userId;
             String eventType = payload.events[0].type;
             listPenyakit = data.getPenyakit(data);
+            String detailPenyakit = "";
 
 
             if(eventType.equals("follow")){
@@ -118,7 +118,7 @@ public class LineBotController {
                     replyToUser(payload.events[0].replyToken, "Halo " + namaUser + ", \nApakah kucing anda memiliki keluhan?");
                     state = "";
                 }else if(msgText.equals("list")){
-                    replyToUser(payload.events[0].replyToken, "List Penyakit : \n"+listPenyakit.toString());
+                    replyToUser(payload.events[0].replyToken, "List Penyakit : \n"+listPenyakit.toString() + "\n\nOptions:\n- penyakit namaPenyakit = Untuk melihat penjelasan dari setiap penyakitnya.");
                 }else if(ans.equals("bingung")){
                     replyToUser(payload.events[0].replyToken, "Iya seperti itu kak,\nApakah kucing anda memiliki keluhan?");
                     state = "";
@@ -131,7 +131,12 @@ public class LineBotController {
                 }else if(ans.equals("help")){
                     replyToUser(payload.events[0].replyToken, "Selamat Datang di CatCare,\nCatCare adalah bot untuk mengetahui penyakit dari keluhan-keluhan yang dialami oleh kucing kesayanganmu.\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.\n- list = Untuk melihat data penyakit yang ada di CatCare.\n\n*Note : Untuk mengidentifikasi masing masing penyakitnya bot ini membutuhkan lebih dari 3 keluhan yang cocok.\n\nBot ini dibuat untuk memenuhi project tugas akhir mata kuliah Pemrograman Berorientasi Objek. Mohon maaf apabila hasil konsultasi yang kurang maksimal atau tidak sesuai itu dikarenakan minimnya data yang kita miliki.\n\nAnggota Kelompok : \nMohamad Achun Armando (140810170020)\nRefa Annisatul Ilma (140810170060)\n\nTeknik Informatika '17\nUniversitas Padjadjaran");
                     state = "";
-                }else if(ans.equals("unknown")){
+                }else if(arrMsg[0].equals("penyakit")){
+                    detailPenyakit = data.detailPenyakit(data, arrMsg[1]);
+                    replyToUser(payload.events[0].replyToken, "Penjelasan penyakit " + arrMsg[0] + ": \n\n" + detailPenyakit);
+                    state = "";
+                }
+                else if(ans.equals("unknown")){
                     replyToUser(payload.events[0].replyToken, "Haii silahkan pilih opsinya kak :)\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.\n- list = Untuk melihat data penyakit yang ada di CatCare.");
                     state = "";
                 }

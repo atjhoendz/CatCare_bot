@@ -16,7 +16,19 @@ public class DataKeluhan {
     private String phthiriasis[] = {"kekurusan", "kurusan", "badan", "kurus", "anemia", "kekurangan", "kurang", "darah", "ikterus", "kulit", "kuning", "radang", "kulit"};
     private String pedikulosis[] = {"kutu", "kutuan", "radang", "kulit"};
 
+    private String detailCacingan = "Cacing merupakan endoparasit (parasit yang hidup dalam tubuh) yang sering menyerang kucing. Sebagian besar kucing yang terinfeksi tidak memperlihatkan gejala. Kucing banyak makan tetapi tetap kurus atau perut buncit merupakan salah satu gejala cacingan. Gejala lainnya bisa berupa adanya cacing berbentuk seperti lidi atau pita tipis berwarna putih pada kotoran atau muntah kucing.Cacing dapat menyebabkan gangguan pencernaan, anemia, kekurangan gizi atau komplikasi lainnya. Anak kucing yang baru lahir dapat tertular cacing dari induknya. Anak kucing yang terserang cacingan dapat mengalami diare berkepanjangan, terhambat pertumbuhannya atau mati karena kekurangan cairan (dehidrasi) dan kekurangan gizi.";
+    private String detailFlu = "Flu kucing adalah penyakit pada kucing yang biasanya disebabkan oleh infeksi satu atau kombinasi beberapa virus (virus herpes dan virus calici) dan bakteri. Penyakit ini jarang menyebabkan kematian pada kucing dewasa tetapi dapat berakibat fatal bila menyerang anak kucing. Meskipun pada kucing dewasa jarang berakibat fatal, gejala-gejala penyakit seperti pilek dan bersin-bersin dapat berlangsung cukup lama. Oleh karena itu pencegahan dengan vaksinasi rutin merupakan tindakan terbaik.";
+    private String detailKoksidiosis = "Koksidiosis adalah penyakit infeksi berat oleh protozoa Coccidia. Biasanya penyakit ini menyerang domba, kambing, sapi, kelinci, dan ayam. Bila yang diserang anjing, kucing, dan babi, penyakit akan lebih ringan. Infeksi terjadi bila bentuk kista tertelan dan masuk ke dalam usus. Di sini protozoa tersebut me\u00ADnyebabkan peradangan, perdarahan usus, dan diare. Sebagai akibatnya, dapat terjadi dehidrasi; dan pada kasus penyakit yang berat dapat terjadi anemia.";
+    private String detailTripanosomiasis = "";
+    private String detailHepatozoonosis = "";
+    private String detailBabesiosis = "";
+    private String detailDistemper = "";
+    private String detailAnkilostomiosis = "";
+    private String detailPhthiriasis = "";
+    private String detailPedikulosis = "";
+
     Map<String, List<String>> dataPenyakit = new HashMap<String, List<String>>();
+    Map<String, String> detailPenyakit = new HashMap<String, String>();
     private String hasilPenyakit = "Sehat";
 
     public DataKeluhan(){
@@ -70,5 +82,20 @@ public class DataKeluhan {
             namaPenyakit.add(entry.getKey());
         }
         return namaPenyakit;
+    }
+
+    public String detailPenyakit(DataKeluhan data, String namaPenyakit){
+        String detPenyakit = "";
+        for (Map.Entry<String, String> entry : data.detailPenyakit.entrySet()){
+            String keyNamaPenyakit = entry.getKey();
+            String detail = entry.getValue();
+            if(keyNamaPenyakit.equals(namaPenyakit)){
+                detPenyakit = detail;
+                break;
+            }else{
+                detPenyakit = "Belum ada data";
+            }
+        }
+        return detPenyakit;
     }
 }
