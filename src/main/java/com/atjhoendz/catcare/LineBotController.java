@@ -26,6 +26,8 @@ public class LineBotController {
     DataKeluhan data = new DataKeluhan();
     DataMessage jawabanMasuk = new DataMessage();
     private String state = "";
+    private String emojiKucing = String.valueOf(Character.toChars(Integer.decode("0x10005F")));
+    private String emojiLove = String.valueOf(Character.toChars(Integer.decode("0x100037")));
 
     @Autowired
     @Qualifier("lineMessagingClient")
@@ -68,7 +70,7 @@ public class LineBotController {
 
 
             if(eventType.equals("follow")){
-                replyToUser(payload.events[0].replyToken, "Hello Cat Lovers 0x10005F! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberitahukan penyakit yang berkaitan dengan keluhan tersebut.\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.");
+                replyToUser(payload.events[0].replyToken, "Hello Cat Lovers "+ emojiKucing+"! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberitahukan penyakit yang berkaitan dengan keluhan tersebut.\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.");
             }else if(eventType.equals("message")){
                 ArrayList<String> listJawaban = new ArrayList<String>();
 
@@ -106,13 +108,13 @@ public class LineBotController {
                     replyToUser(payload.events[0].replyToken, "Tidak sopan kamu ferguso, dasar " + msgText + "\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.");
                     state = "";
                 }else if(ans.equals("thanks")){
-                    replyToUser(payload.events[0].replyToken, "Sama sama kak :)\n\n Semoga lekas sembuh kucingnyaa 0x100037\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.");
+                    replyToUser(payload.events[0].replyToken, "Sama sama kak :)\n\n Semoga lekas sembuh kucingnyaa "+ emojiLove +"\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.");
                     state = "";
                 }else if(ans.equals("sapa")){
                     replyToUser(payload.events[0].replyToken, "Hallo, \nApakah kucing anda memiliki keluhan?");
                     state = "";
                 }else if(ans.equals("unknown")){
-                    replyToUser(payload.events[0].replyToken, "Pesan yang anda kirimkan belum ada di memori saya kak.\nJadi, apakah kucing anda memiliki keluhan?");
+                    replyToUser(payload.events[0].replyToken, "Haii silahkan pilih opsinya kak :)\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.");
                     state = "";
                 }else if(ans.equals("bingung")){
                     replyToUser(payload.events[0].replyToken, "Iya seperti itu kak,\nApakah kucing anda memiliki keluhan?");
