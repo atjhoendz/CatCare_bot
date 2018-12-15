@@ -80,7 +80,7 @@ public class LineBotController {
                 String ans = jawabanMasuk.cekJawaban(listJawaban);
 
 
-                if(ans.equals("ya")){
+                if(ans.equals("ya") && state.equals("")){
                     replyToUser(payload.events[0].replyToken, "Masukan keluhan kucingmu");
                     state = "adakeluhan";
                     ans = "";
@@ -113,12 +113,16 @@ public class LineBotController {
                     state = "";
                 }else if(ans.equals("unknown")){
                     replyToUser(payload.events[0].replyToken, "Pesan yang anda kirimkan belum ada di memori saya kak.\nJadi, apakah kucing anda memiliki keluhan?");
+                    state = "";
                 }else if(ans.equals("bingung")){
                     replyToUser(payload.events[0].replyToken, "Iya seperti itu kak,\nApakah kucing anda memiliki keluhan?");
+                    state = "";
                 }else if(ans.equals("author")){
                     replyToUser(payload.events[0].replyToken, "Pembuat saya adalah \n Mohamad Achun Armando (140810170020) \n\n Data kucing dari \n Refa Annisatul Ilma (140810170060)");
+                    state = "";
                 }else if(ans.equals("myname")){
                     replyToUser(payload.events[0].replyToken, "Dia adalah pembuat saya bernama lengkap Mohamad Achun Armando");
+                    state = "";
                 }
                 else{
                     replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");
