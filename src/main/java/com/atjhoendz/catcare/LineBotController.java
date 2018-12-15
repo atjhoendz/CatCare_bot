@@ -65,7 +65,7 @@ public class LineBotController {
             Payload payload = gson.fromJson(eventsPayload, Payload.class);
 
             String msgText = "";
-            String idTarget = "";
+            String userId = payload.events[0].source.userId;
             String eventType = payload.events[0].type;
 
 
@@ -74,6 +74,7 @@ public class LineBotController {
             }else if(eventType.equals("message")){
                 ArrayList<String> listJawaban = new ArrayList<String>();
 
+                String namaUser = getUserName(userId);
                 msgText = payload.events[0].message.text;
                 msgText = msgText.toLowerCase();
                 String[] arrMsg = msgText.split(" ");
@@ -111,7 +112,7 @@ public class LineBotController {
                     replyToUser(payload.events[0].replyToken, "Sama sama kak :)\n\n Semoga lekas sembuh kucingnyaa "+ emojiLove +"\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.");
                     state = "";
                 }else if(ans.equals("sapa")){
-                    replyToUser(payload.events[0].replyToken, "Hallo, \nApakah kucing anda memiliki keluhan?");
+                    replyToUser(payload.events[0].replyToken, "Halo" + namaUser + ", \nApakah kucing anda memiliki keluhan?");
                     state = "";
                 }else if(ans.equals("unknown")){
                     replyToUser(payload.events[0].replyToken, "Haii silahkan pilih opsinya kak :)\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.");
@@ -155,30 +156,20 @@ public class LineBotController {
         System.out.println(botApiResponse);
     }
 
-    private void quickReply(String rToken, String messageToUser){
+    private String getUserName(String userId){
+        final LineMessagingClient client = LineMessagingClient
+                .builder(lChannelAccessToken)
+                .build();
+        final UserProfileResponse userProfileResponse;
 
-    }
-
-
-
-    private UserProfileResponse getProfile(String userId){
         try{
-            return lineMessagingClient.getProfile(userId).get();
+            userProfileResponse = client.getProfile(userId).get();
         }catch (InterruptedException | ExecutionException e){
-            throw new RuntimeException(e);
-        }
-    }
-
-    @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
-    public ResponseEntity<String> profile(
-            @PathVariable("id") String userId
-    ){
-        UserProfileResponse profile = getProfile(userId);
-        if(profile != null) {
-            String profileName = profile.getDisplayName();
-            return new ResponseEntity<String>("Hello, " + profileName, HttpStatus.OK);
+            e.printStackTrace();
+            return "";
         }
 
-        return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+        return userProfileResponse.getDisplayName();
+
     }
 }

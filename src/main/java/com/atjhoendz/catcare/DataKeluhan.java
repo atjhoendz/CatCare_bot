@@ -26,7 +26,7 @@ public class DataKeluhan {
             Set<String> irisanKeluhan = new HashSet<String>(listKeluhan);
             irisanKeluhan.retainAll(keluhan);
 
-            if(irisanKeluhan.size() > 3){
+            if(irisanKeluhan.size() >= 3){
                 this.hasilPenyakit = namaPenyakit;
                 break;
             }else if(irisanKeluhan.size() == 0){
