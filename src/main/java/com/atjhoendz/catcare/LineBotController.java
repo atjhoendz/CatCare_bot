@@ -68,7 +68,7 @@ public class LineBotController {
 
 
             if(eventType.equals("follow")){
-                replyToUser(payload.events[0].replyToken, "Hello Cat Lovers 0x10005F! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberikan solusinya.\n\nApakah kucing anda memiliki keluhan ?");
+                replyToUser(payload.events[0].replyToken, "Hello Cat Lovers 0x10005F! Ceritakan keluhan yang dialami kucing mu disini, CatCare akan memberitahukan penyakit yang berkaitan dengan keluhan tersebut.\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.");
             }else if(eventType.equals("message")){
                 ArrayList<String> listJawaban = new ArrayList<String>();
 
@@ -130,6 +130,8 @@ public class LineBotController {
                 else{
                     replyToUser(payload.events[0].replyToken, "Haii silahkan pilih opsinya kak :)\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.");
                 }
+            }else if(eventType.equals("unfollow")){
+                replyToUser(payload.events[0].replyToken, "Terima kasih telah konsultasi di CatCare, mohon maaf jika belum bisa memberikan yang terbaik. Kami akan terus berkembang lebih baik lagi");
             }
 
             return new ResponseEntity<>(HttpStatus.OK);
