@@ -117,9 +117,8 @@ public class LineBotController {
                 }else if(ans.equals("sapa")){
                     replyToUser(payload.events[0].replyToken, "Halo " + namaUser + ", \nApakah kucing anda memiliki keluhan?");
                     state = "";
-                }else if(ans.equals("unknown")){
-                    replyToUser(payload.events[0].replyToken, "Haii silahkan pilih opsinya kak :)\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.\n- list = Untuk melihat data penyakit yang ada di CatCare.");
-                    state = "";
+                }else if(msgText.equals("list")){
+                    replyToUser(payload.events[0].replyToken, "List Penyakit : \n"+listPenyakit.toString());
                 }else if(ans.equals("bingung")){
                     replyToUser(payload.events[0].replyToken, "Iya seperti itu kak,\nApakah kucing anda memiliki keluhan?");
                     state = "";
@@ -132,11 +131,12 @@ public class LineBotController {
                 }else if(ans.equals("help")){
                     replyToUser(payload.events[0].replyToken, "Selamat Datang di CatCare,\nCatCare adalah bot untuk mengetahui penyakit dari keluhan-keluhan yang dialami oleh kucing kesayanganmu.\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.\n- list = Untuk melihat data penyakit yang ada di CatCare.\n\n*Note : Untuk mengidentifikasi masing masing penyakitnya bot ini membutuhkan lebih dari 3 keluhan yang cocok.\n\nBot ini dibuat untuk memenuhi project tugas akhir mata kuliah Pemrograman Berorientasi Objek. Mohon maaf apabila hasil konsultasi yang kurang maksimal atau tidak sesuai itu dikarenakan minimnya data yang kita miliki.\n\nAnggota Kelompok : \nMohamad Achun Armando (140810170020)\nRefa Annisatul Ilma (140810170060)\n\nTeknik Informatika '17\nUniversitas Padjadjaran");
                     state = "";
-                }else if(msgText.equals("list")){
-                    replyToUser(payload.events[0].replyToken, "List Penyakit : \n"+listPenyakit.toString());
+                }else if(ans.equals("unknown")){
+                    replyToUser(payload.events[0].replyToken, "Haii silahkan pilih opsinya kak :)\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.\n- list = Untuk melihat data penyakit yang ada di CatCare.");
+                    state = "";
                 }
                 else{
-                    replyToUser(payload.events[0].replyToken, "Haii silahkan pilih opsinya kak :)\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.\n- list = Untuk melihat data penyakit yang ada di CatCare." + msgText);
+                    replyToUser(payload.events[0].replyToken, "Haii silahkan pilih opsinya kak :)\n\nOptions :\n- help/h/bantuan = menampilkan bantuan.\n- care = Untuk memulai konsultasi dengan CatCare.\n- list = Untuk melihat data penyakit yang ada di CatCare.");
                 }
             }
 
