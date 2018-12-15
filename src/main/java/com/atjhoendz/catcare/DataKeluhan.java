@@ -76,7 +76,6 @@ public class DataKeluhan {
 
             if(irisanKeluhan.size() >= 3){
                 this.hasilPenyakit = namaPenyakit;
-                break;
             }else if(irisanKeluhan.size() == 0){
                 this.hasilPenyakit = "Sehat";
             }else{
