@@ -123,6 +123,9 @@ public class LineBotController {
                 }else if(ans.equals("myname")){
                     replyToUser(payload.events[0].replyToken, "Dia adalah pembuat saya bernama lengkap Mohamad Achun Armando");
                     state = "";
+                }else if(ans.equals("help")){
+                    replyToUser(payload.events[0].replyToken, "Selamat Datang di CatCare,\nCatCare adalah bot untuk mengetahui penyakit dari keluhan-keluhan yang dialami oleh kucing kesayanganmu.\n\nOptions :\n- help/h/bantuan = menampilkan bantuan/teks ini.\n- care = Untuk memulai konsultasi dengan CatCare.\n\nBot ini dibuat untuk memenuhi project tugas akhir mata kuliah Pemrograman Berorientasi Objek. Mohon maaf apabila hasil konsultasi yang kurang maksimal atau tidak sesuai itu dikarenakan minimnya data yang kita miliki.\n\nAnggota Kelompok : \nMohamad Achun Armando (140810170020)\nRefa Annisatul Ilma (140810170060)\n\nTeknik Informatika '17\nUniversitas Padjadjaran");
+                    state = "";
                 }
                 else{
                     replyToUser(payload.events[0].replyToken, "Apakah kucing anda memiliki keluhan?");
