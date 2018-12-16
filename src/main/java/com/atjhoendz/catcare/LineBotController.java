@@ -7,12 +7,18 @@ import com.linecorp.bot.model.ReplyMessage;
 import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.model.profile.UserProfileResponse;
 import com.linecorp.bot.model.response.BotApiResponse;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -51,12 +57,30 @@ public class LineBotController {
             @RequestHeader("X-Line-Signature") String aXLineSignature,
             @RequestBody String eventsPayload)
     {
+            try{
+                String channelSecret = lChannelSecret;
+                String httpRequestBody = eventsPayload;
+                SecretKeySpec key = new SecretKeySpec(channelSecret.getBytes(), "HmacSHA256");
+                Mac mac = Mac.getInstance("HmacSHA256");
+                mac.init(key);
+                byte[] source = httpRequestBody.getBytes("UTF-8");
+                String signature = Base64.encodeBase64String(mac.doFinal(source));
 
-            final String text=String.format("The Signature is: %s",
-                    (aXLineSignature!=null && aXLineSignature.length() > 0) ? aXLineSignature : "N/A");
-            System.out.println(text);
-            final boolean valid=new LineSignatureValidator(lChannelSecret.getBytes()).validateSignature(eventsPayload.getBytes(), aXLineSignature);
-            System.out.println("The signature is: " + (valid ? "valid" : "tidak valid"));
+                final String text=String.format("The Signature is: %s",
+                        (aXLineSignature!=null && aXLineSignature.length() > 0) ? aXLineSignature : "N/A");
+                System.out.println(text);
+//                final boolean valid=new LineSignatureValidator(signature, aXLineSignature);
+                System.out.println("The signature is: " + (signature.equals(aXLineSignature) ? "valid" : "tidak valid"));
+            }catch (NoSuchAlgorithmException e){
+                e.printStackTrace();
+            }catch (UnsupportedOperationException e){
+                e.printStackTrace();
+            }catch (InvalidKeyException e){
+                e.printStackTrace();
+            }catch (UnsupportedEncodingException e){
+                e.printStackTrace();
+            }
+
             if(eventsPayload!=null && eventsPayload.length() > 0)
             {
                 System.out.println("Payload: " + eventsPayload);
