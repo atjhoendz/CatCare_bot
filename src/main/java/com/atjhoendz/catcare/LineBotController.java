@@ -69,6 +69,7 @@ public class LineBotController {
                 final String text=String.format("The Signature is: %s",
                         (aXLineSignature!=null && aXLineSignature.length() > 0) ? aXLineSignature : "N/A");
                 System.out.println(text);
+                System.out.println(signature);
 //                final boolean valid=new LineSignatureValidator(signature, aXLineSignature);
                 System.out.println("The signature is: " + (signature.equals(aXLineSignature) ? "valid" : "tidak valid"));
             }catch (NoSuchAlgorithmException e){
