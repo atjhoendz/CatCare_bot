@@ -9,7 +9,7 @@ public class DataKeluhan {
     private String arrCacingan[] = cacingan.split(" ");
     private String koksidiosis[] = {"malas", "gerak", "bergerak", "mager", "anemia", "kekurangan", "kurang", "darah", "diare"};
     private String tripanosomiasis[] = {"malas", "gerak", "bergerak", "mager", "anemia", "kekurangan", "kurang", "darah", "anoreksia", "gamau", "makan", "epifora", "mata", "berair"};
-    private String hepatozoonosis[] = {"malas", "gerak", "bergerak", "mager", "demam", "pucat"};
+    private String scabies[] = {"rambut", "rontok", "gatal", "telinga", "kulit", "menebal", "keriput", "ditutupi"};
     private String babesiosis[] = {"kekurusan", "badan", "kurus", "kurusan", "malas", "gerak", "bergerak", "mager", "demam", "anoreksia", "gamau", "makan", "kelumpuhan", "pincang"};
     private String distemper[] = {"dehidrasi", "malas", "gerak", "bergerak", "mager", "diare", "demam", "anoreksia", "gamau", "makan", "menurun", "halitosis", "bau", "mulut", "muntah", "lesi anggota"};
     private String ankilostomiosis[] = {"anemia", "kekurangan", "kurang", "darah", "diare", "berak", "darah", "melena", "ikterus", "kulit", "kuning", "lesi", "anggota", "batuk", "radang", "kulit"};
@@ -19,13 +19,13 @@ public class DataKeluhan {
     private String detailCacingan = "Cacing merupakan endoparasit (parasit yang hidup dalam tubuh) yang sering menyerang kucing. Sebagian besar kucing yang terinfeksi tidak memperlihatkan gejala. Kucing banyak makan tetapi tetap kurus atau perut buncit merupakan salah satu gejala cacingan. Gejala lainnya bisa berupa adanya cacing berbentuk seperti lidi atau pita tipis berwarna putih pada kotoran atau muntah kucing.Cacing dapat menyebabkan gangguan pencernaan, anemia, kekurangan gizi atau komplikasi lainnya. Anak kucing yang baru lahir dapat tertular cacing dari induknya. Anak kucing yang terserang cacingan dapat mengalami diare berkepanjangan, terhambat pertumbuhannya atau mati karena kekurangan cairan (dehidrasi) dan kekurangan gizi.";
     private String detailFlu = "Flu kucing adalah penyakit pada kucing yang biasanya disebabkan oleh infeksi satu atau kombinasi beberapa virus (virus herpes dan virus calici) dan bakteri. Penyakit ini jarang menyebabkan kematian pada kucing dewasa tetapi dapat berakibat fatal bila menyerang anak kucing. Meskipun pada kucing dewasa jarang berakibat fatal, gejala-gejala penyakit seperti pilek dan bersin-bersin dapat berlangsung cukup lama. Oleh karena itu pencegahan dengan vaksinasi rutin merupakan tindakan terbaik.";
     private String detailKoksidiosis = "Koksidiosis adalah penyakit infeksi berat oleh protozoa Coccidia. Biasanya penyakit ini menyerang domba, kambing, sapi, kelinci, dan ayam. Bila yang diserang anjing, kucing, dan babi, penyakit akan lebih ringan. Infeksi terjadi bila bentuk kista tertelan dan masuk ke dalam usus. Di sini protozoa tersebut me\u00ADnyebabkan peradangan, perdarahan usus, dan diare. Sebagai akibatnya, dapat terjadi dehidrasi; dan pada kasus penyakit yang berat dapat terjadi anemia.";
-    private String detailTripanosomiasis = "";
-    private String detailHepatozoonosis = "";
-    private String detailBabesiosis = "";
-    private String detailDistemper = "";
-    private String detailAnkilostomiosis = "";
-    private String detailPhthiriasis = "";
-    private String detailPedikulosis = "";
+    private String detailTripanosomiasis = "Penyakit tidur yang disebabkan oleh protozoa parasit darah Trypanosoma sp.";
+    private String detailScabies = "Kudis pada kucing yang disebabkan oleh tungau kecil Notoedres cati yang tumbuh di permukaan kulit kucing.";
+    private String detailBabesiosis = "Sejenis malaria pada manusia yang disebabkan oleh protozoa parasit genus Babesia yang menginfeksi sel darah merah kucing. Penyakit ini juga dapat menular ke manusia.";
+    private String detailDistemper = "Radang usus pada kucing yang disebabkan oleh virus. Penyakit ini menular pada sesama kucing saja. Angka kematiannya bisa mencapai 25-85% bagi kucing yang belum divaksinasi";
+    private String detailAnkilostomiosis = "Infeksi pada kucing yang disebabkan oleh cacing jenis Ancylostoma sp.";
+    private String detailPhthiriasis = "Penyakit yang disebabkan oleh parasit Phthirus pubis (kutu). Parasit ini biasanya hidup di luar tubuh inangnya, biasanya berada pada rambut atau bulu kucing untuk mengisap darah sebagai sumber makanannya.";
+    private String detailPedikulosis = "Infeksi pada kulit kucing yang disebabkan oleh parasit Pediculus.";
 
     Map<String, List<String>> dataPenyakit = new HashMap<String, List<String>>();
     Map<String, String> detailPenyakit = new HashMap<String, String>();
@@ -36,7 +36,7 @@ public class DataKeluhan {
         List<String> kFlu = new ArrayList<>(Arrays.asList(flu));
         List<String> kKoks = new ArrayList<>(Arrays.asList(koksidiosis));
         List<String> kTrip = new ArrayList<>(Arrays.asList(tripanosomiasis));
-        List<String> kHepa = new ArrayList<>(Arrays.asList(hepatozoonosis));
+        List<String> kScab = new ArrayList<>(Arrays.asList(scabies));
         List<String> kBabe = new ArrayList<>(Arrays.asList(babesiosis));
         List<String> kDist = new ArrayList<>(Arrays.asList(distemper));
         List<String> kAnki = new ArrayList<>(Arrays.asList(ankilostomiosis));
@@ -47,7 +47,7 @@ public class DataKeluhan {
         dataPenyakit.put("Cacingan", kCacingan);
         dataPenyakit.put("Koksidiosis", kKoks);
         dataPenyakit.put("Tripanosomiasis", kTrip);
-        dataPenyakit.put("Hepatozoonosis", kHepa);
+        dataPenyakit.put("Scabies", kScab);
         dataPenyakit.put("Babesiosis", kBabe);
         dataPenyakit.put("Distemper", kDist);
         dataPenyakit.put("Ankilostomiosis", kAnki);
@@ -58,7 +58,7 @@ public class DataKeluhan {
         detailPenyakit.put("Cacingan", detailCacingan);
         detailPenyakit.put("Koksidiosis", detailKoksidiosis);
         detailPenyakit.put("Tripanosomiasis", detailTripanosomiasis);
-        detailPenyakit.put("Hepatozoonosis", detailHepatozoonosis);
+        detailPenyakit.put("Scabies", detailScabies);
         detailPenyakit.put("Babesiosis", detailBabesiosis);
         detailPenyakit.put("Distemper", detailDistemper);
         detailPenyakit.put("Ankilostomiosis", detailAnkilostomiosis);
